@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(final)
 
+add_compile_options(-std=c++11)
 add_definitions(-DASIO_STANDALONE)
 
 set(IncludeDirectories
