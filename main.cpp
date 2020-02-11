@@ -97,8 +97,35 @@ void Server::onAccept(Session::Pointer session, const asio::error_code& ec) {
 }
 
 int main() {
-    asio::io_context context;
+    std::string address;
     short port = 12345;
+    std::string directory;
+    char option;
+    if (argc < 4) {
+        std::cout << "Not enough arguments\n";
+        return 1;
+    }
+    while ((option = getopt(argc, argv, ":h:p:d:")) != -1) {
+        switch (option) {
+            case 'h':
+                address = optarg;
+                break;
+            case 'p':
+                port = std::stoi(optarg);
+                break;
+            case 'd':
+                directory = optarg;
+                break;
+            case ':':
+                printf("option needs a value\n");
+                break;
+            case '?':
+                printf("unknown option: %c\n", optopt);
+                break;
+        }
+    }
+
+    asio::io_context context;
     Server server(context, port);
     context.run();
     return 0;
