@@ -43,5 +43,5 @@ static void demonize()
 
     /* Change the working directory to the root directory */
     /* or another appropriated directory */
-    chdir("/tmp");
+    chdir("/temp");
 }
