@@ -96,7 +96,7 @@ void Server::onAccept(Session::Pointer session, const asio::error_code& ec) {
     startListen();
 }
 
-int main() {
+int main(int argc, char* argv[]) {
     std::string address;
     short port = 12345;
     std::string directory;
