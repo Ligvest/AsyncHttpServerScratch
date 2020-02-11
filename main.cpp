@@ -2,6 +2,7 @@
 #include <functional>
 #include <iostream>
 #include "httpparser.hpp"
+#include "demonizer.h"
 
 using namespace asio::ip;
 using namespace std::placeholders;
@@ -22,7 +23,6 @@ public:
           maxMessageLength_(2048),
           readMessage_(maxMessageLength_, '\0'),
           parser_("./Html/") {}
-    ~Session() { std::cout << "dtor::session*****************************\n" << std::endl; }
 
 private:
     void onReceive(const asio::error_code& ec, std::size_t bytesReceived);
@@ -97,6 +97,8 @@ void Server::onAccept(Session::Pointer session, const asio::error_code& ec) {
 }
 
 int main(int argc, char* argv[]) {
+    demonize(); //run as daemon
+
     std::string address;
     short port = 12345;
     std::string directory;
